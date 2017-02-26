@@ -34,8 +34,8 @@ class Koan02 extends GroovyTestCase {
         List<String> list = ['item']
 
         // ------------ START EDITING HERE ----------------------
-        map['key'] = 'value'
-        list.clear()
+        map.put("chao", "zhang")
+        list = []
         // ------------ STOP EDITING HERE  ----------------------
 
         assert map.asBoolean()
@@ -49,7 +49,7 @@ class Koan02 extends GroovyTestCase {
 
         // ------------ START EDITING HERE ----------------------
         s1 = ''
-        s2 = 'something'
+        s2 = "hello world"
         // ------------ STOP EDITING HERE  ----------------------
 
         // Note how we can use String expressions inside an if statement.  It is automatically converted into a boolean.
@@ -64,8 +64,8 @@ class Koan02 extends GroovyTestCase {
         def balance = [2, -3, 6, 0, 5]
 
         // Remove (or change) the offending integer to continue
-        // ------------ START EDITING HERE ----------------------
-        balance[3] = 3
+        // ------------ START EDITING HERE ---------------------
+        balance[3]= 1
         // ------------ STOP EDITING HERE  ----------------------
 
         // Iterate through the list and AND the boolean values of its members.
