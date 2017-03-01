@@ -55,7 +55,7 @@ class Koan06 extends GroovyTestCase {
         def differentTypes = [1, 'String', "GString", 'a', 'Another string', 0]
         def uniqueTypes = []
         // ------------ START EDITING HERE ----------------------
-
+        uniqueTypes = differentTypes.collect {it.class}.unique()
 
         // ------------ STOP EDITING HERE  ----------------------
         assert uniqueTypes == [Integer, String]
@@ -69,7 +69,11 @@ class Koan06 extends GroovyTestCase {
         // under the src directory
         int count = 0
         // ------------ START EDITING HERE ----------------------
-
+        new File("src").eachFileRecurse {
+            if (it.isFile() && it.getText().contains('Lorem')) {
+                count++
+            }
+        }
 
         // ------------ STOP EDITING HERE  ----------------------
         assert count == 3
@@ -82,7 +86,11 @@ class Koan06 extends GroovyTestCase {
         def primesBetween200And250 = []
         // ------------ START EDITING HERE ----------------------
 
-
+        primesBetween200And250 = (200..250).findAll { candidate ->
+            (2..<candidate).every { divisor ->
+                candidate % divisor != 0
+            }
+        }
         // ------------ STOP EDITING HERE  ----------------------
         assert primesBetween200And250 == [211, 223, 227, 229, 233, 239, 241]
 
