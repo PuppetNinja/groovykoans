@@ -31,7 +31,7 @@ class Koan07 extends GroovyTestCase {
         def technologies = ['Grails', 'Gradle', '.NET', 'Python', 'Groovy']
         def regexp
         // ------------ START EDITING HERE ----------------------
-
+        regexp = "^G\\w+[es]\$"
 
         // ------------ STOP EDITING HERE  ----------------------
         def result = technologies.findAll { it ==~ regexp }
@@ -51,8 +51,9 @@ class Koan07 extends GroovyTestCase {
                 "and can become difficult to maintain"
         String groovyString
         // ------------ START EDITING HERE ----------------------
-
-
+        groovyString = """In Java a multiline string
+requires using special signs such as ${signs}
+and can become difficult to maintain"""
         // ------------ STOP EDITING HERE  ----------------------
         assert groovyString == javaString
     }
@@ -80,8 +81,7 @@ class Koan07 extends GroovyTestCase {
         // a Slashy string regexp
         def groovyRegExp
         // ------------ START EDITING HERE ----------------------
-
-
+        groovyRegExp = /(?sm)(.*?)\s+(\d+)\s+(\d+)/
         // ------------ STOP EDITING HERE  ----------------------
         def matcher = text =~ groovyRegExp
         def groovySum = matcher.collect { it[3].toInteger() }.sum()
@@ -104,19 +104,19 @@ class Koan07 extends GroovyTestCase {
         // Create the same Pattern object in Groovy
         def patternInGroovy
         // ------------ START EDITING HERE ----------------------
-
-
+        patternInGroovy = ~/\d{3}([,\s])?\d{4}/
         // ------------ STOP EDITING HERE  ----------------------
         assert patternInGroovy instanceof Pattern
         assertEquals(patternInJava.pattern(), patternInGroovy.pattern())
 
-        // Once you have matches using the Groovy Matcher, you are able to iterate through them using the each() method.
+        // Once you have matches using the Groovy Matcher, you are able to iteratethrough them using the each() method.
         // Create a matcher and get the first names from the source text
         def names = 'John Lennon, Paul McCartney, George Harrison, Ringo Starr'
         def firstNamesList = []
         // ------------ START EDITING HERE ----------------------
-
-
+        def nameRegExp = /\w+\s/
+        def matcher = names =~ nameRegExp
+        matcher.each {firstNamesList.add(it.trim())}
         // ------------ STOP EDITING HERE  ----------------------
         assert firstNamesList == ['John', 'Paul', 'George', 'Ringo']
 
@@ -125,8 +125,8 @@ class Koan07 extends GroovyTestCase {
         def number = '4927856234092'
         boolean isNumberValid = false
         // ------------ START EDITING HERE ----------------------
-
-
+        def visaNumberRegex = /^4[0-9]{12}(?:[0-9]{3})?$/
+        isNumberValid = number ==~ visaNumberRegex
         // ------------ STOP EDITING HERE  ----------------------
         assert isNumberValid, 'Visa number should be valid!'
     }
@@ -145,8 +145,7 @@ class Koan07 extends GroovyTestCase {
                       |In the land of submarines'''.stripMargin()
         def result
         // ------------ START EDITING HERE ----------------------
-
-
+        result = song.findAll(/\w+|\n|\s/) { it -> dictionary[it] ?: it }.join()
         // ------------ STOP EDITING HERE  ----------------------
 
         def expected = '''|In the ciudad where I was born
@@ -171,7 +170,12 @@ class Koan07 extends GroovyTestCase {
         // create the same regular expression to sum the total leftovers, but this time document the regex
         String regexp
         // ------------ START EDITING HERE ----------------------
-
+        regexp = /(?smx)
+                  (.*?)     # start string
+                  \s+       # some spaces
+                  (\d+)     # some digits
+                  \s+       # some more spaces
+                  (\d+)     # some more digits/
 
         // ------------ STOP EDITING HERE  ----------------------
         def sum = text.findAll(regexp) { it[3].toInteger() }.sum()
